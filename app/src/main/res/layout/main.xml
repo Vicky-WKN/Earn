@@ -5,7 +5,33 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
 
+        <!--有一些参数使用系统默认参数-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:background="?attr/colorPrimary"
+            style="@style/ToolbarActivityTheme"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:elevation="0dp"
+            >
+            <TextView
+                android:id="@+id/toolBarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:textSize="19sp"
+                android:textColor="#fff"
+                android:text="阅赚宝"
+                />
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
