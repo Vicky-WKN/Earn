@@ -35,13 +35,6 @@
             android:background="@drawable/bg_ad_skip"
             android:weightSum="1">
 
-            <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="19sp"
-               	android:textColor="#ffffffff"
-                />
 
             <Button
                 android:id="@+id/ll_ad_skip_btn"
@@ -51,7 +44,7 @@
                 android:layout_marginLeft="3dp"
                 android:textColor="#ffffffff"
                 android:text="4 跳过 "
-                android:textSize="19sp"
+                android:textSize="15sp"
                 android:layout_weight="0.32" />
         </LinearLayout>
     </RelativeLayout>

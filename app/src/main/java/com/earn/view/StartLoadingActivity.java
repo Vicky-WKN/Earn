@@ -14,7 +14,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.earn.R;
 import com.earn.model.Ad;
@@ -32,7 +31,7 @@ public class StartLoadingActivity extends AppCompatActivity {
     private List<Ad> alist;
     private ImageView welComeImg, adImg;
     private RelativeLayout rl;
-    private TextView dTime;
+
     private Button skipBtn;
     // 是否首次登陆
     private Boolean myIsfirst = null;
@@ -52,7 +51,7 @@ public class StartLoadingActivity extends AppCompatActivity {
         skipBtn = (Button) findViewById(R.id.ll_ad_skip_btn);
 
         adImg = (ImageView) findViewById(R.id.iv_ad_img);
-        dTime = (TextView) findViewById(R.id.tv_time);
+
         // alist = AdvertisementDao.getAdDataList();// 查询广告信息
 //        if (alist != null && alist.size() > 0) {
 //            mAdver = alist.get(alist.size() - 1);
@@ -161,7 +160,7 @@ public class StartLoadingActivity extends AppCompatActivity {
                         if (delayTime > 0) {
                             //welComeImg.setVisibility(View.GONE);
                             rl.setVisibility(View.VISIBLE);
-                            skipBtn.setText(delayTime + "跳过");
+                            skipBtn.setText("跳过 "+delayTime);
                             handler.sendEmptyMessageDelayed(UPDATE_TEAY_TIME, 1000);
                             delayTime--;
                         } else {
