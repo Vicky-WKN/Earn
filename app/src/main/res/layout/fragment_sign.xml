@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="224dp"
+        android:background="@drawable/gradient">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017年7月15号"
+            android:textColor="#fff"
+            android:textSize="19sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            />
+        <ImageView
+            android:id="@+id/sign_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/sign_image"
+            android:layout_below="@+id/date"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+
+            />
+        <ImageView
+            android:id="@+id/signed_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/sign_image2"
+            android:layout_below="@+id/date"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="  注意:"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="（一）点击签到按钮跳转到广告列表页面"
+        android:layout_marginTop="3dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="（二）点击广告列表页面任意一条广告即可完成签到"
+        android:layout_marginTop="3dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="（三）返回阅赚宝首页阅读文章开始收益"
+        android:layout_marginTop="3dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="（四）用4g网络，有几率获得翻倍收益"
+        android:layout_marginTop="3dp"/>
+
+</LinearLayout>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#218BEE"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/invite_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9.56"
+            android:textSize="30sp"
+            android:textColor="#fff"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="累计收益"
+            android:textSize="20sp"
+            android:textColor="#fff"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="5dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#1E98E5"
+        android:orientation="vertical"
+        android:id="@+id/number_layout">
+        <TextView
+            android:id="@+id/invite_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12"
+            android:textSize="30sp"
+            android:textColor="#fff"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="邀请人数"
+            android:textSize="20sp"
+            android:textColor="#fff"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="5dp"
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#2FA0EC"
+        >
+        <ImageView
+            android:id="@+id/erweima_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="60dp"
+            android:src="@drawable/erweima_icon" />
+
+        <ImageView
+            android:id="@+id/people_list_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="60dp"
+            android:src="@drawable/add_people_icon" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_erweima"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#D8D7E4"
+       >
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/image_erweima"
+            android:background="#fff"
+            android:scaleType="fitXY"/>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layout_peopleList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#EBEBEB"
+        android:visibility="gone"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="#fff">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="姓名"
+                android:layout_marginLeft="30dp"
+                android:textSize="19sp"
+                android:layout_centerVertical="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="等级"
+                android:layout_centerHorizontal="true"
+                android:textSize="19sp"
+                android:layout_centerVertical="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="时间"
+                android:layout_alignParentEnd="true"
+                android:textSize="19sp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="30dp"/>
+
+        </RelativeLayout>
+        <ListView
+            android:id="@+id/people_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff">
+        </ListView>
+
+    </LinearLayout>
+
+</LinearLayout>

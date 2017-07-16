@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ToolbarActivityTheme" parent="AppTheme">
+        <!--启用ActionBar的叠加模式(不生效)-->
+        <item name="windowActionBarOverlay">true</item>
+        <!--状态栏半透明-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <!--内容填充到导航栏-->
+        <item name="android:windowTranslucentNavigation">true</item>
+        <!--设置全屏-->
+        <item name="android:windowFullscreen">true</item>
+    </style>
+</resources>

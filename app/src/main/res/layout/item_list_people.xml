@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginTop="10dp"
+    android:background="#fff"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:id="@+id/item_people_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="姓名"
+        android:layout_marginLeft="30dp"
+        android:textSize="19sp"
+        android:layout_centerVertical="true"/>
+    <TextView
+        android:id="@+id/item_people_grade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="等级"
+        android:layout_centerHorizontal="true"
+        android:textSize="19sp"
+        android:layout_centerVertical="true"/>
+    <TextView
+        android:id="@+id/item_people_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="时间"
+        android:layout_alignParentEnd="true"
+        android:textSize="19sp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="30dp"/>
+</RelativeLayout>
