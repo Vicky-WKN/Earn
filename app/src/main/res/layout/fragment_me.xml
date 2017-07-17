@@ -1,10 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <RelativeLayout
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="我"/>
+        android:layout_height="160dp"
+        android:background="@color/colorPrimary">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/user_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            fresco:placeholderImage="@drawable/test_image"
+            fresco:placeholderImageScaleType="fitCenter"
+
+            fresco:actualImageScaleType="focusCrop"
+            fresco:progressBarImage="@drawable/loading"
+            fresco:progressBarImageScaleType="centerInside"
+            fresco:progressBarAutoRotateInterval="5000"
+
+            fresco:failureImage="@drawable/fail"
+            fresco:failureImageScaleType="centerInside"
+
+            fresco:roundAsCircle="true"
+            fresco:roundingBorderWidth="3dp"
+            fresco:roundingBorderColor="#fff"
+            />
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/user_image"
+            android:layout_marginTop="5dp"
+            android:text="名字"
+            android:textColor="#fff"
+            android:textSize="19sp"/>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/test"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        >
+    <TextView
+        android:id="@+id/name_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="当前余额:"
+        android:textSize="19sp"
+        android:textColor="#000"
+        android:layout_marginLeft="20dp"
+        android:layout_gravity="center_vertical"
+        />
+    <TextView
+        android:id="@+id/number_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="200.2"
+        android:textSize="19sp"
+        android:textColor="#000"
+        android:layout_alignEnd="@+id/name_money"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_gravity="center_vertical"
+            >
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:text="提现"
+            android:textColor="#fff"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_shape"
+            />00000000000
+    </LinearLayout>
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#DDD"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#FFF"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/study_icon"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="  新手学堂"
+            android:textSize="19sp"
+            android:textAlignment="textStart"
+            android:drawableRight="@drawable/right_icon"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#FFF"
+            android:layout_marginTop="3dp"
+            android:drawableLeft="@drawable/come_in"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="  收入明细"
+            android:textSize="19sp"
+            android:textAlignment="textStart"
+            android:drawableRight="@drawable/right_icon"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#FFF"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/my_friends"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="  我的人脉"
+            android:textSize="19sp"
+            android:textAlignment="textStart"
+            android:drawableRight="@drawable/right_icon"
+            />
+    </LinearLayout>
 </LinearLayout>

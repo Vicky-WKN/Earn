@@ -15,6 +15,7 @@ import com.earn.view.fragment.HomeFragment;
 import com.earn.view.fragment.InviteFragment;
 import com.earn.view.fragment.MeFragment;
 import com.earn.view.fragment.SignFragment;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 /**
  * Created by asus on 2017/7/14.
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        Fresco.initialize(this);
         setDefaultFragment();
         InitBottomNavigationBar();
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolBar);
