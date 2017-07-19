@@ -3,4 +3,15 @@
     <color name="colorPrimary">#1B70DF</color>
     <color name="colorPrimaryDark">#1B70DF</color>
     <color name="colorAccent">#1B70DF</color>
+
+    <color name="divider">#ffdddddd</color>
+    <color name="category_tab_text">#ff707070</color>
+    <color name="category_tab_text_dark">#fffafafa</color>
+    <color name="category_tab_highlight_text">#fffafafa</color>
+    <color name="category_tab_highlight_text_dark">#ffd43d3d</color>
+    <color name="category_tab_highlight_bg">#ffd43d3d</color>
+    <color name="category_tab_highlight_dark_bg">#fffafafa</color>
+    <color name="activity_bg_color">#fffafafa</color>
+    <color name="top_category_bar_background">#ffeeeeee</color>
+
 </resources>
