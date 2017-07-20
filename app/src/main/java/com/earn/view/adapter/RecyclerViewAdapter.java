@@ -7,8 +7,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.earn.R;
+import com.earn.model.News;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by asus on 2017/7/16.
@@ -43,10 +45,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     /**
      * 设置数据
-     * @param datas
+     * @param list
      */
-    public void addDatas(ArrayList<String> datas){
-        mDatas.addAll(datas);
+    public void addDatas(ArrayList<News.result> list){
+        Iterator it = list.iterator();
+        while (it.hasNext()){
+            News.result i = (News.result) it.next();
+            mDatas.add(i.getTitle());
+        }
         notifyDataSetChanged();
     }
 

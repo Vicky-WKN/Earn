@@ -2,7 +2,9 @@ package com.earn.view.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.earn.Contract.NewsContract;
 import com.earn.R;
+import com.earn.model.News;
+import com.earn.presenter.NewsPresenter;
 import com.earn.view.adapter.RecyclerViewAdapter;
 import com.earn.view.adapter.TestNomalAdapter;
 import com.jude.rollviewpager.RollPagerView;
@@ -22,7 +27,7 @@ import java.util.ArrayList;
  * Created by asus on 2017/7/15.
  */
 
-public class NewFragment extends Fragment  {
+public class NewFragment extends Fragment implements NewsContract.View {
     View view;
 
     View viewPager;
@@ -30,13 +35,27 @@ public class NewFragment extends Fragment  {
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerViewAdapter mAdapter;
+    SwipeRefreshLayout refreshLayout ;
+    NewsPresenter newsPresenter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         view = inflater.inflate(R.layout.fragment_new,container,false);
-
         viewPager = inflater.inflate(R.layout.news_viewpager_item,container,false);
+        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refreshLayout);
+        refreshLayout.setColorSchemeResources(R.color.colorPrimary);//设置下拉更新旋转颜色
+        initViewPager();
+
+        newsPresenter.start();
+        return view;
+    }
+
+    /**
+     * 初始化viewPager的数据
+     */
+    private void initViewPager() {
+        //图片浏览设置
         rollPagerView = (RollPagerView) viewPager.findViewById(R.id.rollPagerView);
         rollPagerView.setHintView(new IconHintView(getActivity(),R.drawable.dark_dot,R.drawable.white_dot));
         //rollPagerView.setHintView(new ColorPointHintView(getActivity(), Color.YELLOW,Color.WHITE));
@@ -44,37 +63,80 @@ public class NewFragment extends Fragment  {
         //rollPagerView.setHintView(null);//隐藏指示器
         rollPagerView.setAdapter(new TestNomalAdapter());
 
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        mAdapter = new RecyclerViewAdapter();
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.addDatas(generateData());
-        setHeader(mRecyclerView);
-//        mAdapter.setOnItemClickListener(new RecyclerViewAdapter().setOnItemClickListener(); {
+
+        //        mAdapter.setOnItemClickListener(new RecyclerViewAdapter().setOnItemClickListener(); {
 //            @Override
 //            public void onItemClick(int position, String data) {
 //                Toast.makeText(getActivity(), data, Toast.LENGTH_SHORT).show();
 //            }
 //        });
-        return view;
     }
 
-    private ArrayList<String> generateData() {
-        ArrayList<String> datas = new ArrayList<>();
-        for(int i =0 ;i<20;i++){
-            datas.add("数据"+i);
-        }
-        return datas;
-    }
-
-
+    /**
+     * 更改数据
+     * @return
+     */
+//    private ArrayList<String> generateData() {
+//        ArrayList<String> datas = new ArrayList<>();
+//        for(int i =0 ;i<20;i++){
+//            datas.add("数据"+i);
+//        }
+//        return datas;
+//    }
     private void setHeader(RecyclerView view)
     {
         //View header = LayoutInflater.from(getActivity()).inflate(viewPager,view,false);
         mAdapter.setHeaderView(viewPager);
     }
 
+
+
+
+
+    //------------------------分割线（mvp)-------------------//
+
+    @Override
+    public void showError() {
+        Snackbar.make(refreshLayout,"加载失败",Snackbar.LENGTH_INDEFINITE)
+                .setAction("重试", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //presenter.refresh();
+                    }
+                }).show();
+    }
+
+    @Override
+    public void showLoading() {
+        refreshLayout.setRefreshing(true);
+    }
+
+    @Override
+    public void stopLoading() {
+        refreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void showResult(ArrayList<News.result> list) {
+        if(mAdapter == null){
+            mAdapter = new RecyclerViewAdapter();
+            /**
+             * 然后设置点击阅读
+             */
+            mRecyclerView.setAdapter(mAdapter);
+        }
+        mAdapter.addDatas(list);
+        setHeader(mRecyclerView);
+    }
+
+    @Override
+    public void setPresenter(NewsContract.Presenter presenter) {
+        this.newsPresenter = newsPresenter;
+    }
 }

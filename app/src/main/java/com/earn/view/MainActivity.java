@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     private void setDefaultFragment() {
         fm = getSupportFragmentManager();
         transaction = fm.beginTransaction();
-        homeFragment = HomeFragment.getInstance();
+        homeFragment = new HomeFragment();
         transaction.replace(R.id.fragment_container,homeFragment);
         transaction.commit();
     }
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         switch (position){
             case 0:
                 if(homeFragment == null){
-                    homeFragment = HomeFragment.getInstance();
+                    homeFragment = new HomeFragment();
                 }
                 transaction.replace(R.id.fragment_container,homeFragment);
                 toolTitle.setText("阅赚宝");
