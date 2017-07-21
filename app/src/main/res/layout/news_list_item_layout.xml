@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="96dp"
     android:layout_width="match_parent"
+    xmlns:fresco="http://schemas.android.com/tools"
     android:focusable="true"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="4dp"
     app:cardElevation="1dp"
     app:cardPreventCornerOverlap="true"
-    android:layout_marginTop="8dp"
->
+    android:layout_marginTop="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,11 +33,25 @@
             android:ellipsize="end"
             android:textSize="18sp" />
 
-        <ImageView
+
+        <com.facebook.drawee.view.SimpleDraweeView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:id="@+id/imageViewCover"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+
+            fresco:placeholderImage="@drawable/test_image"
+            fresco:placeholderImageScaleType="fitCenter"
+
+            fresco:actualImageScaleType="focusCrop"
+            fresco:progressBarImage="@drawable/loading"
+            fresco:progressBarImageScaleType="centerInside"
+            fresco:progressBarAutoRotateInterval="5000"
+
+            fresco:failureImage="@drawable/fail"
+            fresco:failureImageScaleType="centerInside"
+
+            />
 
     </LinearLayout>
 

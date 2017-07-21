@@ -8,16 +8,22 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.VolleyError;
 import com.earn.Contract.NewsContract;
 import com.earn.R;
 import com.earn.model.News;
-import com.earn.presenter.NewsPresenter;
+import com.earn.model.OnStringListener;
+import com.earn.model.StringModelImpl;
+import com.earn.util.Api;
 import com.earn.view.adapter.RecyclerViewAdapter;
 import com.earn.view.adapter.TestNomalAdapter;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.IconHintView;
 
@@ -36,7 +42,20 @@ public class NewFragment extends Fragment implements NewsContract.View {
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerViewAdapter mAdapter;
     SwipeRefreshLayout refreshLayout ;
-    NewsPresenter newsPresenter;
+    NewsContract.Presenter newsPresenter;
+
+    private StringModelImpl model;
+
+    private ArrayList<News.result> list = new ArrayList<>();
+    private Gson gson = new Gson();
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -47,7 +66,83 @@ public class NewFragment extends Fragment implements NewsContract.View {
         refreshLayout.setColorSchemeResources(R.color.colorPrimary);//设置下拉更新旋转颜色
         initViewPager();
 
-        newsPresenter.start();
+        //newsPresenter = new NewsPresenter(getContext(),this);
+        //newsPresenter.start();
+        //ArrayList<News.result> list = new ArrayList<>();
+        showResult(list);
+        model = new StringModelImpl(getContext());
+
+        //---------------------------------------------------
+
+        model.load(Api.GUOKR_ARTICLES, new OnStringListener() {
+            @Override
+            public void onSuccess(String result) {
+
+                // 由于果壳并没有按照日期加载的api
+                // 所以不存在加载指定日期内容的操作，当要请求数据时一定是在进行刷新
+                list.clear();
+
+                Log.d("打印json内容", result);
+                try {
+
+                    News question = gson.fromJson(result, News.class);
+
+                    for (News.result re : question.getResult()){
+
+                        list.add(re);
+
+                    }
+                    showResult(list);
+
+                } catch (JsonSyntaxException e) {
+                    showError();
+                }
+
+                stopLoading();
+
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+                stopLoading();
+                showError();
+            }
+        });
+        /*showLoading();
+        OkHttpUtil okHttpUtil = OkHttpUtil.getOkHttpUtil();
+        okHttpUtil.get(Api.GUOKR_ARTICLES, new okhttp3.Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("获取results","失败",e);
+                stopLoading();
+                showError();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseBody = response.body().string();
+
+                News question = gson.fromJson(responseBody,News.class);
+                for(News.result re : question.getResult()){
+                    list.add(re);
+                }
+                //ArrayList<News.result> list1 = new ArrayList<>();
+                showResult(list);
+                //final String token = JsonUtil.getToken(responseBody);
+                Log.d("打印json内容", responseBody);
+
+            }
+        });
+        stopLoading();*/
+        //--------------------------------------------------
+
+
+
+
+        //list.add(new News.result());
+//        News n = new News();
+//        News.result re = n.result;
+//        showResult(list);
         return view;
     }
 
@@ -124,19 +219,22 @@ public class NewFragment extends Fragment implements NewsContract.View {
 
     @Override
     public void showResult(ArrayList<News.result> list) {
-        if(mAdapter == null){
-            mAdapter = new RecyclerViewAdapter();
+        if(mAdapter == null) {
+            mAdapter = new RecyclerViewAdapter(getActivity());
             /**
              * 然后设置点击阅读
              */
             mRecyclerView.setAdapter(mAdapter);
         }
         mAdapter.addDatas(list);
+
         setHeader(mRecyclerView);
     }
 
     @Override
     public void setPresenter(NewsContract.Presenter presenter) {
-        this.newsPresenter = newsPresenter;
+        if (presenter != null){
+            this.newsPresenter =  presenter;
+        }
     }
 }

@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     private MeFragment meFragment;
     FragmentManager fm;
     FragmentTransaction transaction;
-    TextView toolTitle;
+    //TextView toolTitle;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         setDefaultFragment();
         InitBottomNavigationBar();
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolBar);
-        toolTitle = (TextView) findViewById(R.id.toolBarTitle);
+        //toolTitle = (TextView) findViewById(R.id.toolBarTitle);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);//隐藏默认标题,貌似toolbar.setTitle("")有同样的效果
     }
@@ -82,28 +81,31 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                     homeFragment = new HomeFragment();
                 }
                 transaction.replace(R.id.fragment_container,homeFragment);
-                toolTitle.setText("阅赚宝");
+                //toolTitle.setText("阅赚宝");
                 break;
             case 1:
+
                 if(signFragment == null){
                     signFragment = SignFragment.getInstance();
                 }
                 transaction.replace(R.id.fragment_container,signFragment);
-                toolTitle.setText("签到");
+                //toolTitle.setText("签到");
                 break;
             case 2:
+
                 if(inviteFragment == null){
                     inviteFragment = InviteFragment.getInstance();
                 }
                 transaction.replace(R.id.fragment_container,inviteFragment);
-                toolTitle.setText("邀请");
+                //toolTitle.setText("邀请");
                 break;
             case 3:
+
                 if(meFragment == null){
                     meFragment = MeFragment.getInstance();
                 }
                 transaction.replace(R.id.fragment_container,meFragment);
-                toolTitle.setText("个人中心");
+                //toolTitle.setText("个人中心");
                 break;
         }
         transaction.commit();

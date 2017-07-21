@@ -1,6 +1,11 @@
 package com.earn.view.adapter;
 
+
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +13,8 @@ import android.widget.TextView;
 
 import com.earn.R;
 import com.earn.model.News;
+import com.earn.view.WebActivity;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,7 +31,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private ArrayList<String> mDatas = new ArrayList<>();
     private View mHeaderView ;//头部件
     private OnItemClickListener mListener;
+    private ArrayList<String> pics = new ArrayList<>();
+    private ArrayList<String> uri = new ArrayList<>();
 
+    private Context context;
+    public RecyclerViewAdapter(Context context)
+    {
+        this.context = context;
+    }
 
     public void setOnItemClickListener(OnItemClickListener li){
         mListener = li;
@@ -48,11 +62,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
      * @param list
      */
     public void addDatas(ArrayList<News.result> list){
+        mDatas.clear();
+        News news = new News();
         Iterator it = list.iterator();
         while (it.hasNext()){
-            News.result i = (News.result) it.next();
-            mDatas.add(i.getTitle());
+             News.result re = (News.result) it.next();
+            mDatas.add(re.getTitle());
+            pics.add(re.getHeadline_img_tb());
+            uri.add(re.getLink_v2_sync_img());
+            Log.d("标题是:",re.getTitle());
         }
+
+//        for (int i = 0;i<20;i++)
+//        {
+////            News.result result =list.get(i);
+////            mDatas.add(result.getTitle());
+//            mDatas.add("数据"+i);
+//        }
+      // notify();
         notifyDataSetChanged();
     }
 
@@ -87,13 +114,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if(getItemViewType(position) == TYPE_HEADER) return ;
         final int pos = getRealPosition(viewHolder);
         final String data = mDatas.get(pos);
+        final String pi = pics.get(pos);
+        final String u = uri.get(pos);
         if(viewHolder instanceof Holder){
             ((Holder) viewHolder).text.setText(data);
-            if((mListener == null)) return;
+            Log.d("图片是:",pi);
+            Uri imageUri = Uri.parse(pi);
+            ((Holder) viewHolder).simpleDraweeView.setImageURI(imageUri);
+            //if((mListener == null)) return;
             viewHolder.itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                    mListener.onItemClick(pos,data);
+                   // mListener.onItemClick(pos,data);
+                    Intent intent = new Intent();
+                    intent.setClass(context, WebActivity.class);
+                    intent.putExtra("uri",u);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
                 }
             });
         }
@@ -111,10 +148,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     class Holder extends RecyclerView.ViewHolder{
         TextView text;
+        SimpleDraweeView simpleDraweeView;
+        //ImageView image;
         public Holder(View itemView){
             super(itemView);
             if(itemView == mHeaderView) return;
             text = (TextView) itemView.findViewById(R.id.textViewTitle);
+            //image = (ImageView) itemView.findViewById(R.id.imageViewCover);
+            simpleDraweeView = (SimpleDraweeView) itemView.findViewById(R.id.imageViewCover);
         }
     }
     interface OnItemClickListener{
