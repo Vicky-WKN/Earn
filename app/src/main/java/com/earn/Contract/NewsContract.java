@@ -1,7 +1,6 @@
 package com.earn.Contract;
 
 import com.earn.model.News;
-import com.earn.view.BaseView;
 
 import java.util.ArrayList;
 
@@ -10,7 +9,7 @@ import java.util.ArrayList;
  */
 
 public interface NewsContract {
-    interface View extends BaseView<Presenter> {
+    interface View {
 
         void showError();
 

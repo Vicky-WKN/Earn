@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,14 +62,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
      */
     public void addDatas(ArrayList<News.result> list){
         mDatas.clear();
-        News news = new News();
+        //News news = new News();
         Iterator it = list.iterator();
         while (it.hasNext()){
              News.result re = (News.result) it.next();
             mDatas.add(re.getTitle());
             pics.add(re.getHeadline_img_tb());
-            uri.add(re.getLink_v2_sync_img());
-            Log.d("标题是:",re.getTitle());
+            uri.add(re.getLink());
+            //Log.d("标题是:",re.getTitle());
         }
 
 //        for (int i = 0;i<20;i++)
@@ -118,7 +117,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         final String u = uri.get(pos);
         if(viewHolder instanceof Holder){
             ((Holder) viewHolder).text.setText(data);
-            Log.d("图片是:",pi);
+            //Log.d("图片是:",pi);
             Uri imageUri = Uri.parse(pi);
             ((Holder) viewHolder).simpleDraweeView.setImageURI(imageUri);
             //if((mListener == null)) return;
