@@ -36,4 +36,10 @@
         <!--设置全屏-->
         <item name="android:windowFullscreen">true</item>
     </style>
+
+    <style name="EditText">
+        <item name="colorPrimary">#fff</item>
+        <item name="colorPrimaryDark">#fff</item>
+        <item name="colorAccent">#fff</item>
+    </style>
 </resources>

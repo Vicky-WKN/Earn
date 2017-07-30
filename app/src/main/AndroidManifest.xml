@@ -22,6 +22,7 @@
         </activity>
 
         <activity android:name=".view.WebActivity"></activity>
+        <activity android:name=".view.LoginActivity"></activity>
     </application>
 
 </manifest>

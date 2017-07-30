@@ -27,7 +27,8 @@ public class MeFragment extends Fragment {
             return meFragment;
         }else{
             return meFragment;
-        }    }
+        }
+    }
 
 
     @Nullable

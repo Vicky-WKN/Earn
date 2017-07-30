@@ -10,10 +10,12 @@ import android.widget.FrameLayout;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.earn.R;
+import com.earn.util.Constants;
 import com.earn.view.fragment.HomeFragment;
 import com.earn.view.fragment.InviteFragment;
 import com.earn.view.fragment.MeFragment;
 import com.earn.view.fragment.SignFragment;
+import com.earn.view.fragment.ToLoginFragment;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 /**
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     private SignFragment signFragment;
     private InviteFragment inviteFragment;
     private MeFragment meFragment;
+    private ToLoginFragment toLoginFragment;
     FragmentManager fm;
     FragmentTransaction transaction;
     //TextView toolTitle;
@@ -85,26 +88,45 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 break;
             case 1:
 
-                if(signFragment == null){
-                    signFragment = SignFragment.getInstance();
+                if(Constants.logined){
+                    if(signFragment == null){
+                        signFragment = SignFragment.getInstance();
+                    }
+                    transaction.replace(R.id.fragment_container,signFragment);
+                }else{
+                    if(toLoginFragment == null){
+                        toLoginFragment = ToLoginFragment.getInstance();
+                    }
+                    transaction.replace(R.id.fragment_container,toLoginFragment);
                 }
-                transaction.replace(R.id.fragment_container,signFragment);
                 //toolTitle.setText("签到");
                 break;
             case 2:
 
-                if(inviteFragment == null){
-                    inviteFragment = InviteFragment.getInstance();
+                if(Constants.logined) {
+                    if (inviteFragment == null) {
+                        inviteFragment = InviteFragment.getInstance();
+                    }
+                    transaction.replace(R.id.fragment_container, inviteFragment);
+                } else{
+                    if(toLoginFragment == null){
+                        toLoginFragment = ToLoginFragment.getInstance();
+                    }
+                    transaction.replace(R.id.fragment_container,toLoginFragment);
                 }
-                transaction.replace(R.id.fragment_container,inviteFragment);
-                //toolTitle.setText("邀请");
                 break;
             case 3:
-
-                if(meFragment == null){
-                    meFragment = MeFragment.getInstance();
+                if(Constants.logined){
+                    if(meFragment == null){
+                        meFragment = MeFragment.getInstance();
+                    }
+                    transaction.replace(R.id.fragment_container,meFragment);
+                } else{
+                    if(toLoginFragment == null){
+                        toLoginFragment = ToLoginFragment.getInstance();
+                    }
+                    transaction.replace(R.id.fragment_container,toLoginFragment);
                 }
-                transaction.replace(R.id.fragment_container,meFragment);
                 //toolTitle.setText("个人中心");
                 break;
         }
