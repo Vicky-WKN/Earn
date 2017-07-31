@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+    <ImageView
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/no_login_person"/>
+    <Button
+        android:id="@+id/to_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="去登录"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_shape"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        />
+</LinearLayout>
