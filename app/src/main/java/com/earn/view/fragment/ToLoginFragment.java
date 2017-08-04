@@ -20,7 +20,6 @@ public class ToLoginFragment extends Fragment {
 
     static ToLoginFragment toLoginFragment;
 
-
     public static ToLoginFragment getInstance(){
         if (toLoginFragment == null){
             toLoginFragment = new ToLoginFragment();
@@ -32,7 +31,7 @@ public class ToLoginFragment extends Fragment {
     private Button button;
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         final View view = inflater.inflate(R.layout.fragment_to_login,container,false);
         button = (Button) view.findViewById(R.id.to_login_button);
@@ -41,6 +40,8 @@ public class ToLoginFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(view.getContext(), LoginActivity.class);
                 startActivity(intent);
+                getActivity().finish();
+
             }
         });
         return view;

@@ -68,39 +68,4 @@ public class Model {
                 .build();
         client.newCall(request).enqueue(callback);
     }
-
-    /**
-     * post方式提交Json
-     *
-     * @param context
-     * @param url
-     * @param content
-     * @param callback
-     */
-//    public void postJson(final Context context, String url, String content, final ICallBack callback) {
-//
-//        RequestBody requestBody = RequestBody.create(
-//                MediaType.parse("application/json"), content);
-//        Request request = new Request.Builder()
-//                .url(url)
-//                .post(requestBody)
-//                .build();
-//        client.newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                callback.result(e.toString());
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                if (response.isSuccessful()) {
-//                    callback.result(response.body().string());
-//                } else {
-//                    callback.result("请求失败！");
-//                }
-//            }
-//        });
-//    }
-
-
 }

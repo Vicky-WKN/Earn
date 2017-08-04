@@ -9,21 +9,31 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.earn.Contract.LoginContract;
 import com.earn.R;
+import com.earn.presenter.LoginPresenter;
 import com.earn.util.Constants;
+import com.earn.util.SharedPreferencesUtil;
+import com.earn.util.ToastUtil;
+
+import java.util.HashMap;
 
 /**
  * Created by asus on 2017/7/29.
  */
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener,LoginContract.View {
     private MyVideoView myVideoView;
     private Button loginButton;
+    private EditText id;
+    private EditText pwd;
     private TextView forgetButton;
     private TextView registerButton;
+    private LoginContract.Presenter presenter;
     @Override
     public void onCreate(Bundle savedInstanceStated){
         super.onCreate(savedInstanceStated);
@@ -32,7 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //去掉Activity上面的状态栏
         getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN , WindowManager.LayoutParams. FLAG_FULLSCREEN);
         setContentView(R.layout.layout_login);
-
+        presenter = new LoginPresenter(this,this);
         initView();
 
     }
@@ -45,6 +55,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         registerButton =(TextView) findViewById(R.id.login_register_button);
         registerButton.setOnClickListener(this);
 
+        id = (EditText) findViewById(R.id.login_id);
+        pwd = (EditText) findViewById(R.id.login_pwd);
+
+        if(Constants.LOGINFAG == 0)
+        {
+            //读取上一次登录的账号密码
+            id.setText(SharedPreferencesUtil.getData(this,"id"));
+            pwd.setText(SharedPreferencesUtil.getData(this,"pwd"));
+        }else{
+            //如果是从注册或者修改密码界面中过来的就读取Extra内容
+            Intent intent = getIntent();
+            id.setText(intent.getStringExtra("id"));
+            pwd.setText(intent.getStringExtra("pwd"));
+            Constants.LOGINFAG = 0;
+        }
 
         playVideo();
     }
@@ -98,8 +123,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.login_button:
                 //Toast.makeText(this,"登录操作",Toast.LENGTH_LONG).show();
                 //成功的话
-                Constants.logined =true;
-                finish();
+                HashMap<String,String> map = new HashMap<>();
+                map.put("id",id.getText().toString());
+                map.put("pwd",pwd.getText().toString());
+                presenter.login(map);
                 break;
             case R.id.login_forget_button:
                 Toast.makeText(this,"忘记密码操作",Toast.LENGTH_LONG).show();
@@ -113,5 +140,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             default:
                 Toast.makeText(this,"还有这种操作？？？",Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void showError(final int i) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new ToastUtil(LoginActivity.this,i);
+            }
+        });
+    }
+
+    @Override
+    public void showSuccess() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Constants.logined =true;
+                SharedPreferencesUtil.pustData(LoginActivity.this,id.getText().toString(),pwd.getText().toString(),Constants.token);
+                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }

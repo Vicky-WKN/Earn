@@ -9,7 +9,9 @@ import android.widget.FrameLayout;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.earn.Contract.MainContract;
 import com.earn.R;
+import com.earn.presenter.MainPresenter;
 import com.earn.util.Constants;
 import com.earn.view.fragment.HomeFragment;
 import com.earn.view.fragment.InviteFragment;
@@ -22,7 +24,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
  * Created by asus on 2017/7/14.
  */
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener {
+public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener ,MainContract.View{
 
     BottomNavigationBar bottomNavigationBar;
     FrameLayout frameLayout;
@@ -33,18 +35,21 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     private ToLoginFragment toLoginFragment;
     FragmentManager fm;
     FragmentTransaction transaction;
+    private MainContract.Presenter presenter;
     //TextView toolTitle;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         Fresco.initialize(this);
-        setDefaultFragment();
-        InitBottomNavigationBar();
+        setDefaultFragment();//设置一打开就默认的碎片
+        InitBottomNavigationBar();//BottomBar设置
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolBar);
         //toolTitle = (TextView) findViewById(R.id.toolBarTitle);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);//隐藏默认标题,貌似toolbar.setTitle("")有同样的效果
+        presenter = new MainPresenter(this,this);
+        presenter.start();
     }
 
     /**
@@ -71,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 .addItem(new BottomNavigationItem(R.drawable.me,"我"))
                 .initialise();
 
-        bottomNavigationBar.setTabSelectedListener(this);
+        bottomNavigationBar.setTabSelectedListener(MainActivity.this);
     }
 
     @Override
@@ -140,6 +145,20 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 
     @Override
     public void onTabReselected(int position) {
+
+    }
+
+    @Override
+    public void start(final int i) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if(i == 0){
+                    Constants.logined = true;
+                }
+
+            }
+        });
 
     }
 }

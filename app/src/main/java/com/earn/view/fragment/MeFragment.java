@@ -7,8 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.earn.R;
+import com.earn.util.Constants;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 /**
@@ -19,6 +21,8 @@ public class MeFragment extends Fragment {
     static MeFragment meFragment;
     private SimpleDraweeView mSimpleDraweeView;
     View view;
+    private TextView userName;
+    private TextView money;
     public static MeFragment getInstance()
     {
         if (meFragment == null)
@@ -44,5 +48,10 @@ public class MeFragment extends Fragment {
         mSimpleDraweeView = (SimpleDraweeView) view.findViewById(R.id.user_image);
         Uri imageUri = Uri.parse("http://oct7drhkl.bkt.clouddn.com/myImage.png");
         mSimpleDraweeView.setImageURI(imageUri);
+        userName = (TextView) view.findViewById(R.id.user_name);
+        money = (TextView) view.findViewById(R.id.number_money);
+        userName.setText(Constants.name);
+        double num_money =Constants.studentMoney+Constants.money;
+        money.setText(String.valueOf(num_money));
     }
 }
