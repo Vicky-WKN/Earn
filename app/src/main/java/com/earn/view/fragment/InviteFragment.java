@@ -1,5 +1,8 @@
 package com.earn.view.fragment;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,8 +13,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.earn.R;
+import com.earn.util.Constants;
+import com.earn.view.MatrixToImageWriter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,8 +32,10 @@ public class InviteFragment extends Fragment{
     View view;
     ImageView erWeiMaIcon;
     ImageView peopleList;
+    ImageView erWeiMa;
     View eLayout;
     View pLayout;
+    private TextView studentMoney;
     static InviteFragment inviteFragment;
     public static InviteFragment getInstance()
     {
@@ -70,6 +78,15 @@ public class InviteFragment extends Fragment{
             }
         });
 
+        erWeiMa = (ImageView) view.findViewById(R.id.invite_erweima);
+        Resources res=getResources();
+        Bitmap bmp= BitmapFactory.decodeResource(res, R.mipmap.logo);
+        Bitmap bitmap = null;
+        bitmap = MatrixToImageWriter.generateBitmap("http://www.csdn.net",200,200);
+        Bitmap bitmap1 = MatrixToImageWriter.addLogo(bitmap,bmp);
+        erWeiMa.setImageBitmap(bitmap1);
+        studentMoney = (TextView) view.findViewById(R.id.invite_money);
+        studentMoney.setText(String.valueOf(Constants.studentMoney));
         initListView();
         return view;
     }
