@@ -159,9 +159,11 @@ http://39.108.98.193:8080/EarnServer/WithdrawServlet
 |money|String|是|
 |way  |String|是|
 
-
-
-
+```
+{"status":0}
+{"err":201,"status":201}
+{"err":304,"status":304}
+```
 
 ###更新
 |错误代码|错误信息|

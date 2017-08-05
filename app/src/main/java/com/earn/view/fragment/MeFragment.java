@@ -7,10 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.earn.R;
 import com.earn.util.Constants;
+import com.earn.view.WithdrawDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 /**
@@ -18,11 +20,13 @@ import com.facebook.drawee.view.SimpleDraweeView;
  */
 
 public class MeFragment extends Fragment {
+    private WithdrawDialog withdrawDialog;
     static MeFragment meFragment;
     private SimpleDraweeView mSimpleDraweeView;
     View view;
     private TextView userName;
     private TextView money;
+    private Button withDrawButton;
     public static MeFragment getInstance()
     {
         if (meFragment == null)
@@ -53,5 +57,18 @@ public class MeFragment extends Fragment {
         userName.setText(Constants.name);
         double num_money =Constants.studentMoney+Constants.money;
         money.setText(String.valueOf(num_money));
+
+        //提现按钮
+        withDrawButton = (Button) view.findViewById(R.id.me_withdraw_button);
+
+        //提现对话框
+        withdrawDialog = new WithdrawDialog(getActivity());
+        withDrawButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                withdrawDialog.show();
+            }
+        });
+
     }
 }

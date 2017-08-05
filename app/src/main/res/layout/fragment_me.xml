@@ -78,13 +78,14 @@
             android:layout_gravity="center_vertical"
             >
         <Button
+            android:id="@+id/me_withdraw_button"
             android:layout_width="80dp"
             android:layout_height="30dp"
             android:text="提现"
             android:textColor="#fff"
             android:layout_marginRight="10dp"
             android:background="@drawable/button_shape"
-            />00000000000
+            />
     </LinearLayout>
 </LinearLayout>
     <LinearLayout
