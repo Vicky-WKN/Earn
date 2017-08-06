@@ -73,4 +73,28 @@ public class MeFragment extends Fragment {
         });
 
     }
+
+
+//
+//    @Override
+//    public void onActivityResult(int requestCode,int resultCode,Intent intent)
+//    {
+//        super.onActivityResult(requestCode,resultCode,intent);
+//        Log.d("返回码",""+requestCode);
+//        switch(resultCode){
+//            case RESULT_OK:
+//                Log.d("返回码","有");
+//                withdrawDialog.show();
+//                break;
+//        }
+//    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (Constants.SETTING == 1){
+            withdrawDialog.show();
+        }
+        Constants.SETTING = 0;
+    }
 }

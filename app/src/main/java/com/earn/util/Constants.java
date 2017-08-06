@@ -17,5 +17,7 @@ public class Constants {
     public final static int NOFOUND = 404;
     //立fag判断是否从注册或者修改密码跳转过来的
     public static int LOGINFAG = 0;
+    //判断是否从设置账号中过来的
+    public static int SETTING = 0;
 
 }

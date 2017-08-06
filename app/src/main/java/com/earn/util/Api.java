@@ -21,4 +21,8 @@ public class Api
     public static final String getUserData = EarnServer+"GetDataServlet";
     //提现
     public static final String withDrawUrl = EarnServer+"WithdrawServlet";
+    //更新alipay
+    public static final String updataAlipay = EarnServer+"AlipayServlet";
+    //更新wechat
+    public static final String udataWechat = EarnServer+"WechatServlet";
 }

@@ -26,7 +26,7 @@
                 android:layout_width="100dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center"
+
                 android:scaleType="fitXY"
                 android:src="@drawable/text_logo" />
         </android.support.v7.widget.Toolbar>
