@@ -66,6 +66,8 @@ public class MeFragment extends Fragment {
         withDrawButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 withdrawDialog.show();
             }
         });

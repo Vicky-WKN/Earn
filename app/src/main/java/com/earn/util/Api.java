@@ -19,4 +19,6 @@ public class Api
     public static final String registerUrl = EarnServer+"RegisterServlet";
     //获取用户信息
     public static final String getUserData = EarnServer+"GetDataServlet";
+    //提现
+    public static final String withDrawUrl = EarnServer+"WithdrawServlet";
 }

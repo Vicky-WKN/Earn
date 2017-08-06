@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.earn.R;
-import com.earn.view.LoginActivity;
+import com.earn.view.activity.LoginActivity;
 
 /**
  * Created by asus on 2017/7/29.

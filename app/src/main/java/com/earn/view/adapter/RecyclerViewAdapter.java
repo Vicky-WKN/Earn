@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.earn.R;
 import com.earn.model.News;
-import com.earn.view.WebActivity;
+import com.earn.view.activity.WebActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
