@@ -25,6 +25,8 @@
         <activity android:name=".view.activity.LoginActivity"></activity>
         <activity android:name=".view.activity.RegisterActivity"></activity>
         <activity android:name=".view.activity.WdSettingActivity"></activity>
+        <activity android:name=".view.activity.SettingActivity"></activity>
+        <activity android:name=".view.activity.ChangeActivity"></activity>
     </application>
 
 </manifest>

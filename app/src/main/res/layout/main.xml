@@ -29,6 +29,15 @@
 
                 android:scaleType="fitXY"
                 android:src="@drawable/text_logo" />
+            <ImageView
+                android:id="@+id/setting_button"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/setting_icon"
+                android:layout_gravity="end"
+                android:layout_marginRight="10dp"
+                android:visibility="gone"
+                />
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
     <FrameLayout

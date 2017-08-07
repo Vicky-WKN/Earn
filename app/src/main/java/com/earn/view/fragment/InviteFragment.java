@@ -82,7 +82,7 @@ public class InviteFragment extends Fragment{
         Resources res=getResources();
         Bitmap bmp= BitmapFactory.decodeResource(res, R.mipmap.logo);
         Bitmap bitmap = null;
-        bitmap = MatrixToImageWriter.generateBitmap("http://www.csdn.net",200,200);
+        bitmap = MatrixToImageWriter.generateBitmap("http://39.108.98.193:8080/EarnServer",200,200);
         Bitmap bitmap1 = MatrixToImageWriter.addLogo(bitmap,bmp);
         erWeiMa.setImageBitmap(bitmap1);
         studentMoney = (TextView) view.findViewById(R.id.invite_money);
@@ -94,11 +94,11 @@ public class InviteFragment extends Fragment{
     private void initListView() {
         listView = (ListView) view.findViewById(R.id.people_list);
         List<HashMap<String,String>> list = new ArrayList<>();
-        for(int i =0;i<10;i++)
+        for(int i =0;i<0;i++)
         {
             HashMap<String,String> map = new HashMap<String,String>();
             map.put("name","张三");
-            map.put("grade","白银");
+            map.put("grade","1.21");
             map.put("time","2017.4.23");
             list.add(map);
         }
