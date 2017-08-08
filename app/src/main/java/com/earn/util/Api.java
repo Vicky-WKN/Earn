@@ -26,4 +26,10 @@ public class Api
     public static final String updataAlipay = EarnServer+"AlipayServlet";
     //更新wechat
     public static final String udataWechat = EarnServer+"WechatServlet";
+    //更新密码
+    public static final String updataPWD  = EarnServer+"UpdataPWDServlet";
+    //更新Name
+    public static final String updataName  = EarnServer+"UpdataNameServlet";
+    //查询徒弟
+    public static final String getStudent = EarnServer+"GetStudentServlet";
 }

@@ -40,13 +40,6 @@ http://39.108.98.193:8080/EarnServer/GetC
 
 
 
-### 用户修改密码（未完成）
-user/change
-|参数 |数据类型|必填   |描述 |
-|-----|-------|-----  |-----|
-|phone| string|    yes|   手机号|
-|pwd  |string | yes   |  新密码|
-|code   | string |   yes |  验证码|
 
 
 
@@ -164,6 +157,33 @@ http://39.108.98.193:8080/EarnServer/WithdrawServlet
 {"err":201,"status":201}
 {"err":304,"status":304}
 ```
+
+
+### 用户修改密码（完成）
+http://39.108.98.193:8080/EarnServer/
+|参数 |数据类型|必填   |描述 |
+|-----|-------|-----  |-----|
+|token| string|    yes|   手机号|
+|pwd  |string | yes   |  新密码|
+|code   | string |   yes |  验证码|
+
+
+### 用户修改名称（完成）
+user/change
+http://39.108.98.193:8080/EarnServer/UpdataNameServlet
+|参数 |数据类型|必填   |描述 |
+|-----|-------|-----  |-----|
+|token| string|    yes|   手机号|
+|name  |string | yes   |  新名称|
+
+
+
+### 查询徒弟（未完成）
+|参数 |数据类型|必填   |描述 |
+|-----|-------|-----  |-----|
+|token| string|    yes|   手机号|
+
+
 
 ###更新
 |错误代码|错误信息|

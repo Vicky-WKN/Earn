@@ -15,7 +15,10 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.earn.Contract.InviteContract;
 import com.earn.R;
+import com.earn.model.StudentData;
+import com.earn.presenter.InvitePresenter;
 import com.earn.util.Constants;
 import com.earn.view.MatrixToImageWriter;
 
@@ -27,7 +30,7 @@ import java.util.List;
  * Created by asus on 2017/7/15.
  */
 
-public class InviteFragment extends Fragment{
+public class InviteFragment extends Fragment implements InviteContract.View{
     ListView listView;
     View view;
     ImageView erWeiMaIcon;
@@ -36,7 +39,9 @@ public class InviteFragment extends Fragment{
     View eLayout;
     View pLayout;
     private TextView studentMoney;
+    private TextView studentNub;
     static InviteFragment inviteFragment;
+    private InviteContract.Presenter presenter;
     public static InviteFragment getInstance()
     {
         if (inviteFragment == null)
@@ -59,6 +64,8 @@ public class InviteFragment extends Fragment{
         erWeiMaIcon = (ImageView) view.findViewById(R.id.erweima_icon);
         peopleList = (ImageView) view.findViewById(R.id.people_list_icon);
         erWeiMaIcon.setColorFilter(Color.YELLOW);
+        presenter = new InvitePresenter(getActivity(),this);
+
         erWeiMaIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,21 +94,28 @@ public class InviteFragment extends Fragment{
         erWeiMa.setImageBitmap(bitmap1);
         studentMoney = (TextView) view.findViewById(R.id.invite_money);
         studentMoney.setText(String.valueOf(Constants.studentMoney));
-        initListView();
+        studentNub = (TextView) view.findViewById(R.id.invite_number);
+        studentNub.setText(Constants.invite_number+" ");
+        //initListView(ArrayList<StudentData.Students> studentses);
+        presenter.getStudents();
         return view;
     }
 
-    private void initListView() {
+
+    private void initListView(ArrayList<StudentData.Students> studentses) {
         listView = (ListView) view.findViewById(R.id.people_list);
         List<HashMap<String,String>> list = new ArrayList<>();
-        for(int i =0;i<0;i++)
+        Constants.invite_number = studentses.size();
+        for(int i =0;i<studentses.size();i++)
         {
-            HashMap<String,String> map = new HashMap<String,String>();
-            map.put("name","张三");
-            map.put("grade","1.21");
-            map.put("time","2017.4.23");
+            StudentData.Students students = studentses.get(i);
+            HashMap<String,String> map = new HashMap<>();
+            map.put("name",students.getName());
+            map.put("grade",students.getMyselfMoney());
+            map.put("time","");
             list.add(map);
         }
+        studentNub.setText(Constants.invite_number+" ");
         SimpleAdapter adapter = new SimpleAdapter(
                 getActivity(),
                 list,
@@ -109,5 +123,15 @@ public class InviteFragment extends Fragment{
                 new String[]{"name","grade","time"},
                 new int[]{R.id.item_people_name,R.id.item_people_grade,R.id.item_people_time});
         listView.setAdapter(adapter);
+    }
+
+    @Override
+    public void showSuccess(final ArrayList<StudentData.Students> studentses) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                initListView(studentses);
+            }
+        });
     }
 }

@@ -40,4 +40,5 @@ dependencies {
     compile 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
     compile 'com.google.zxing:zxing-parent:3.3.0'
     compile files('libs/zxing.jar')
+    compile files('libs/fastjson-1.2.35.jar')
 }

@@ -22,4 +22,6 @@ public class Constants {
     public static int FROMLOGIN = 0;
     //判断是否从设置账号中过来的
     public static int SETTING = 0;
+    //邀请人数
+    public static int invite_number = 0;
 }
