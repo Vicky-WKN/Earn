@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#EEE">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/setting_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/setting_back"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/turn_left"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="设置"
+                android:textSize="25sp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#fff"/>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+
+    <LinearLayout
+        android:id="@+id/setting_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#EEE"
+        android:visibility="visible">
+    <ListView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/setting_list"
+        android:dividerHeight="10dp"
+        android:divider="#EEE">
+    </ListView>
+
+    <Button
+        android:id="@+id/setting_out"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="退出当前账号"
+        android:textSize="19sp"
+        android:background="@drawable/button_shape3"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"/>
+    </LinearLayout>
+
+
+    <!--+++++++++++++++++++++++++++++++++修改密码+++++++++++++++++++++++++++++++++++++++++-->
+    <LinearLayout
+        android:id="@+id/setting1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:background="#EEE"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#EEE"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="验证码"
+                android:textSize="25dp" />
+
+            <EditText
+                android:id="@+id/setting_code"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/setting_getcode_button"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/button_shape"
+                android:text="获取验证码"
+                android:layout_marginRight="10dp"
+                android:textColor="#fff" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#EEE"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="新密码"
+                android:textSize="25dp" />
+
+            <EditText
+                android:id="@+id/setting_pwd1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_horizontal"
+                android:layout_marginRight="10dp"
+                android:inputType="textPassword"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#EEE"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="新密码"
+                android:textSize="25dp" />
+            <EditText
+                android:id="@+id/setting_pwd2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_horizontal"
+                android:inputType="textPassword"
+                android:hint="再输一遍"/>
+        </LinearLayout>
+        <Button
+            android:id="@+id/setting_updata_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="确定修改"
+            android:textSize="19sp"
+            android:background="@drawable/button_shape3"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"/>
+    </LinearLayout>
+
+    <!--+++++++++++++++++++++++++++++++++设置名称+++++++++++++++++++++++++++++++++++++++-->
+    <LinearLayout
+        android:id="@+id/setting2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#EEE"
+        android:layout_marginTop="20dp"
+        android:visibility="gone">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#EEE"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="新名称"
+                android:textSize="25dp" />
+            <EditText
+                android:id="@+id/setting_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_horizontal" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/setting_name_ok_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="确定修改"
+            android:textSize="19sp"
+            android:background="@drawable/button_shape3"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"/>
+    </LinearLayout>
+
+    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    <LinearLayout
+        android:id="@+id/setting3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#EEE"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:visibility="gone">
+
+        <EditText
+            android:text=""
+            android:id="@+id/help_feedback"
+            android:lines="5"
+            android:gravity="top"
+            android:hint="请输入您的反馈意见(字数500以内)！"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        </EditText>
+        <Button
+            android:id="@+id/setting_sugestion_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="发送"
+            android:textSize="19sp"
+            android:background="@drawable/button_shape3"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"/>
+    </LinearLayout>
+
+    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    <LinearLayout
+        android:id="@+id/setting4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#EEE"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="腊肠工作室"
+            />
+    </LinearLayout>
+</LinearLayout>

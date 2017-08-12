@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.earn">
-
+    package="com.earn"
+    android:versionCode="1"
+    android:versionName="1.0"
+    >
+    <!--往sdcard中写入数据的权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission-sdk-23 android:name="android.permission.INTERNET"></uses-permission-sdk-23>
     <uses-permission android:name="android.permission.INTERNET" />
     <application
@@ -21,12 +25,24 @@
         <activity android:name=".view.activity.MainActivity">
         </activity>
 
+        <activity android:name=".view.activity.MySettingActivity"></activity>
         <activity android:name=".view.activity.WebActivity"></activity>
         <activity android:name=".view.activity.LoginActivity"></activity>
         <activity android:name=".view.activity.RegisterActivity"></activity>
         <activity android:name=".view.activity.WdSettingActivity"></activity>
-        <activity android:name=".view.activity.SettingActivity"></activity>
         <activity android:name=".view.activity.ChangeActivity"></activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.earn.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false"
+            >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
     </application>
 
 </manifest>

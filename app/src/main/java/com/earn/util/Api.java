@@ -32,4 +32,6 @@ public class Api
     public static final String updataName  = EarnServer+"UpdataNameServlet";
     //查询徒弟
     public static final String getStudent = EarnServer+"GetStudentServlet";
+    //查询更新
+    public static final String checkUpadte = EarnServer+"version.txt";
 }
