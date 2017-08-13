@@ -14,8 +14,9 @@ import android.view.ViewGroup;
 
 import com.earn.Contract.NewsContract;
 import com.earn.R;
-import com.earn.model.News;
+import com.earn.model.NewResult;
 import com.earn.presenter.NewsPresenter;
+import com.earn.util.ToastUtil;
 import com.earn.view.adapter.RecyclerViewAdapter;
 import com.earn.view.adapter.TestNomalAdapter;
 import com.google.gson.Gson;
@@ -30,7 +31,6 @@ import java.util.ArrayList;
 
 public class NewFragment extends Fragment implements NewsContract.View,SwipeRefreshLayout.OnRefreshListener {
     View view;
-
     View viewPager;
     RollPagerView rollPagerView;
     RecyclerView mRecyclerView;
@@ -39,10 +39,20 @@ public class NewFragment extends Fragment implements NewsContract.View,SwipeRefr
     SwipeRefreshLayout refreshLayout ;
     NewsContract.Presenter newsPresenter;
 
-    private ArrayList<News.result> list = new ArrayList<>();
+    private ArrayList<NewResult> list = new ArrayList<>();
     private Gson gson = new Gson();
 
+    //新闻分类
+    private int param = 1;
 
+    public static  NewFragment newInstance(int param){
+        NewFragment fragmentOne = new NewFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("param", param);
+        //fragment保存参数，传入一个Bundle对象
+        fragmentOne.setArguments(bundle);
+        return fragmentOne;
+    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +63,12 @@ public class NewFragment extends Fragment implements NewsContract.View,SwipeRefr
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        //判断类型
+        if(getArguments()!=null){
+            //取出保存的值
+            param = getArguments().getInt("param");
+            new ToastUtil(getActivity(),"param="+param);
+        }
         view = inflater.inflate(R.layout.fragment_new,container,false);
         viewPager = inflater.inflate(R.layout.news_viewpager_item,container,false);
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refreshLayout);
@@ -61,9 +77,9 @@ public class NewFragment extends Fragment implements NewsContract.View,SwipeRefr
 
         newsPresenter = new NewsPresenter(getActivity(),this);
         //newsPresenter = new NewsPresenter(getContext(),this);
-        newsPresenter.start();
+        newsPresenter.start(param);
         //ArrayList<News.result> list = new ArrayList<>();
-        showResult(list);
+        //showResult(list);
         refreshLayout.setOnRefreshListener(this);
         return view;
     }
@@ -127,6 +143,7 @@ public class NewFragment extends Fragment implements NewsContract.View,SwipeRefr
                         .setAction("重试", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                newsPresenter.refresh(param);
                                 //presenter.refresh();
                             }
                         }).show();
@@ -145,7 +162,7 @@ public class NewFragment extends Fragment implements NewsContract.View,SwipeRefr
     }
 
     @Override
-    public void showResult(final ArrayList<News.result> list) {
+    public void showResult(final ArrayList<NewResult.News> list) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -168,6 +185,13 @@ public class NewFragment extends Fragment implements NewsContract.View,SwipeRefr
     //--------------------------------------------更新新闻------------------------------------
     @Override
     public void onRefresh() {
-        newsPresenter.refresh();
+        newsPresenter.refresh(param);
     }
+
+//    @Override
+//    public void onStart(){
+//        newsPresenter.start(param);
+//    }
+
+
 }

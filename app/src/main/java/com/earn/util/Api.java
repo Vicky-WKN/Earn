@@ -34,4 +34,6 @@ public class Api
     public static final String getStudent = EarnServer+"GetStudentServlet";
     //查询更新
     public static final String checkUpadte = EarnServer+"version.txt";
+    //查询新闻
+    public static final String getNew = EarnServer+"GetNewServlet";
 }

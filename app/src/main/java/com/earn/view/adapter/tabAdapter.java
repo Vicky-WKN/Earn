@@ -1,5 +1,6 @@
 package com.earn.view.adapter;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -18,22 +19,21 @@ public class tabAdapter extends FragmentPagerAdapter {
 
     private NewFragment newFragment = null;
     private NewFragment last = null;
+    private Context context;
 
         private final List<String> catalogs = new ArrayList<String>();
 
-        public tabAdapter(FragmentManager fm) {
+        public tabAdapter(FragmentManager fm,Context context) {
             super(fm);
-            catalogs.add("热点");
-            catalogs.add("\u672c\u5730");
-            catalogs.add("视频");
-            catalogs.add("社会");
-            catalogs.add("娱乐");
-            catalogs.add("科技");
-            catalogs.add("财经");
             catalogs.add("军事");
+            catalogs.add("排行");
+            catalogs.add("公益");
+            catalogs.add("国内");
             catalogs.add("国际");
-            catalogs.add("美女");
+            catalogs.add("媒体");
             catalogs.add("政务");
+            catalogs.add("社会");
+            this.context = context;
         }
 
         @Override
@@ -49,9 +49,9 @@ public class tabAdapter extends FragmentPagerAdapter {
         @Override
         public Fragment getItem(int position) {
             last = newFragment;
-             newFragment = new NewFragment();
+             newFragment = NewFragment.newInstance(position+1);
+            //new ToastUtil(context,"第"+position);
             return newFragment;
-
         }
 
     }

@@ -2,7 +2,6 @@ package com.earn.view.adapter;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,8 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.earn.R;
-import com.earn.model.News;
-import com.earn.view.activity.WebActivity;
+import com.earn.model.NewResult;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -60,15 +58,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
      * 设置数据
      * @param list
      */
-    public void addDatas(ArrayList<News.result> list){
+    public void addDatas(ArrayList<NewResult.News> list){
         mDatas.clear();
         //News news = new News();
         Iterator it = list.iterator();
         while (it.hasNext()){
-             News.result re = (News.result) it.next();
+             NewResult.News re = (NewResult.News) it.next();
             mDatas.add(re.getTitle());
-            pics.add(re.getHeadline_img_tb());
-            uri.add(re.getLink());
+            pics.add(re.getImgLinks());
+            //uri.add(re.getLink());
             //Log.d("标题是:",re.getTitle());
         }
 
@@ -114,24 +112,28 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         final int pos = getRealPosition(viewHolder);
         final String data = mDatas.get(pos);
         final String pi = pics.get(pos);
-        final String u = uri.get(pos);
+        //final String u = uri.get(pos);
         if(viewHolder instanceof Holder){
             ((Holder) viewHolder).text.setText(data);
             //Log.d("图片是:",pi);
-            Uri imageUri = Uri.parse(pi);
-            ((Holder) viewHolder).simpleDraweeView.setImageURI(imageUri);
+            if(pi!=null)
+            {
+                Uri imageUri = Uri.parse(pi);
+                ((Holder) viewHolder).simpleDraweeView.setImageURI(imageUri);
+            }
+
             //if((mListener == null)) return;
-            viewHolder.itemView.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                   // mListener.onItemClick(pos,data);
-                    Intent intent = new Intent();
-                    intent.setClass(context, WebActivity.class);
-                    intent.putExtra("uri",u);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
-                }
-            });
+//            viewHolder.itemView.setOnClickListener(new View.OnClickListener(){
+//                @Override
+//                public void onClick(View v){
+//                   // mListener.onItemClick(pos,data);
+//                    Intent intent = new Intent();
+//                    intent.setClass(context, WebActivity.class);
+//                    intent.putExtra("uri",u);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    context.startActivity(intent);
+//                }
+//            });
         }
     }
 

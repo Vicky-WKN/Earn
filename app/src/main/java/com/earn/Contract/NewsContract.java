@@ -1,6 +1,6 @@
 package com.earn.Contract;
 
-import com.earn.model.News;
+import com.earn.model.NewResult;
 
 import java.util.ArrayList;
 
@@ -17,16 +17,16 @@ public interface NewsContract {
 
         void stopLoading();
 
-        void showResult(ArrayList<News.result> list);
+        void showResult(ArrayList<NewResult.News> list);
     }
 
     interface Presenter{
 
-        void start();
+        void start(int i);
 
-        void loadPosts();
+        void loadPosts(int i);
 
-        void refresh();
+        void refresh(int i);
 
         void starReading(int position);
     }

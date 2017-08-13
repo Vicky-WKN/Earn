@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment{
     private void initViewPager() {
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         tabs = (MyTab) view.findViewById(R.id.category_strip);
-        adapter = new tabAdapter((getActivity()).getSupportFragmentManager());
+        adapter = new tabAdapter((getActivity()).getSupportFragmentManager(),getActivity());
         viewPager.setAdapter(adapter);
         tabs.setViewPager(viewPager);
     }
