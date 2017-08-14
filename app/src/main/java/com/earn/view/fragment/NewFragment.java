@@ -16,7 +16,6 @@ import com.earn.Contract.NewsContract;
 import com.earn.R;
 import com.earn.model.NewResult;
 import com.earn.presenter.NewsPresenter;
-import com.earn.util.ToastUtil;
 import com.earn.view.adapter.RecyclerViewAdapter;
 import com.earn.view.adapter.TestNomalAdapter;
 import com.google.gson.Gson;
@@ -67,8 +66,20 @@ public class NewFragment extends Fragment implements NewsContract.View,SwipeRefr
         if(getArguments()!=null){
             //取出保存的值
             param = getArguments().getInt("param");
-            new ToastUtil(getActivity(),"param="+param);
+            //new ToastUtil(getActivity(),"param="+param);
         }
+
+        // TODO 自动生成的方法存根
+        if (view != null) {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if (parent != null) {
+                parent.removeView(view);
+            }
+            return view;
+        }
+        //return contentView = inflater.inflate(R.layout.fragment,
+          //      container, false);
+
         view = inflater.inflate(R.layout.fragment_new,container,false);
         viewPager = inflater.inflate(R.layout.news_viewpager_item,container,false);
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refreshLayout);
