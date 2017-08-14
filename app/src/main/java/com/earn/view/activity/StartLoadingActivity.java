@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -16,13 +17,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.earn.Contract.MainContract;
 import com.earn.R;
 import com.earn.model.Ad;
+import com.earn.presenter.MainPresenter;
+import com.earn.util.Constants;
 
 import java.util.List;
 
 
-public class StartLoadingActivity extends AppCompatActivity {
+public class StartLoadingActivity extends AppCompatActivity implements MainContract.View {
     private final int MSG_LOGIN_SUCCESS = 100;
     private final int MSG_LOGIN_FAIL = 101;
     private final int MSG_VERSION_CHECK_TIMEOUT = 102;
@@ -42,6 +46,9 @@ public class StartLoadingActivity extends AppCompatActivity {
     private boolean adIsFinish = true;
     private Ad mAdver = null;
 
+    //更新信息
+    private MainContract.Presenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +60,8 @@ public class StartLoadingActivity extends AppCompatActivity {
 
         adImg = (ImageView) findViewById(R.id.iv_ad_img);
 
+        presenter = new MainPresenter(this,this);
+        presenter.start();
         // alist = AdvertisementDao.getAdDataList();// 查询广告信息
 //        if (alist != null && alist.size() > 0) {
 //            mAdver = alist.get(alist.size() - 1);
@@ -69,9 +78,10 @@ public class StartLoadingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 jumpToMain();
-                finish();
             }
-        });}
+        });
+
+    }
 //        adImg.setOnClickListener(new OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -138,6 +148,11 @@ public class StartLoadingActivity extends AppCompatActivity {
 
     private void jumpToMain() {
         startActivity(new Intent(StartLoadingActivity.this, MainActivity.class));
+        handler.removeMessages(100);
+        handler.removeMessages(101);
+        handler.removeMessages(102);
+        handler.removeMessages(103);
+        finish();
     }
 
     private Handler handler = new Handler() {
@@ -179,5 +194,28 @@ public class StartLoadingActivity extends AppCompatActivity {
 
     private void skipToLoginOrMain() {
         handler.sendEmptyMessageDelayed(UPDATE_TEAY_TIME, 1000);
+    }
+
+    /**
+     * 重新获取用户信息，更新信息
+     * @param i
+     */
+    @Override
+    public void start(final int i) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if(i == 0){
+                    Constants.logined = true;
+                    Log.d("获取信息成功", "run: ");
+                    //new ToastUtil(MainActivity.this,"获取信息成功");
+                }else{
+                    Constants.logined = false;
+                    //new ToastUtil(MainActivity.this,"获取信息失败");
+                    Log.d("获取信息失败", "run: ");
+                }
+            }
+        });
+
     }
 }

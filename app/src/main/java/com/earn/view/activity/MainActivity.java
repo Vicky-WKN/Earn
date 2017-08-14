@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -29,7 +28,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
  * Created by asus on 2017/7/14.
  */
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener ,MainContract.View{
+public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener,MainContract.View{
 
     BottomNavigationBar bottomNavigationBar;
     FrameLayout frameLayout;
@@ -50,10 +49,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         setContentView(R.layout.main);
         //获取用户信息
         Constants.id = SharedPreferencesUtil.getData(this,"id");
-        initView();
-
         presenter = new MainPresenter(this,this);
-        presenter.start();
+        initView();
     }
 
     private void initView() {
@@ -184,27 +181,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         super.onRestart();
     }
 
-    /**
-     * 重新获取用户信息，更新信息
-     * @param i
-     */
+
     @Override
-    public void start(final int i) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if(i == 0){
-                    Constants.logined = true;
-                    Log.d("获取信息成功", "run: ");
-                    //new ToastUtil(MainActivity.this,"获取信息成功");
-                }else{
-                    Constants.logined = false;
-                    //new ToastUtil(MainActivity.this,"获取信息失败");
-                    Log.d("获取信息失败", "run: ");
-                }
-            }
-        });
+    public void start(int i) {
 
     }
-
 }

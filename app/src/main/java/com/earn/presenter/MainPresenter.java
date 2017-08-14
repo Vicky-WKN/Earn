@@ -53,7 +53,16 @@ public class MainPresenter implements MainContract.Presenter {
                     String responseBody = response.body().string();
                     try {
                         int status = JsonUtil.getData(responseBody);
-                        view.start(status);
+                        if(status == 0){
+                            Constants.logined = true;
+                            Log.d("获取信息成功", "run: ");
+                            //new ToastUtil(MainActivity.this,"获取信息成功");
+                        }else{
+                            Constants.logined = false;
+                            //new ToastUtil(MainActivity.this,"获取信息失败");
+                            Log.d("获取信息失败", "run: ");
+                        }
+                        //view.start(status);
                         Log.d("获取信息失败", "run: ");
                         Log.d("申请获取用户信息", "onResponse: "+status);
                     } catch (JSONException e) {
