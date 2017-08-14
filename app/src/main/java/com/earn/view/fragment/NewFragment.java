@@ -1,5 +1,6 @@
 package com.earn.view.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -69,6 +70,7 @@ public class NewFragment extends Fragment implements NewsContract.View,SwipeRefr
             //new ToastUtil(getActivity(),"param="+param);
         }
 
+
         // TODO 自动生成的方法存根
         if (view != null) {
             ViewGroup parent = (ViewGroup) view.getParent();
@@ -92,6 +94,7 @@ public class NewFragment extends Fragment implements NewsContract.View,SwipeRefr
         //ArrayList<News.result> list = new ArrayList<>();
         //showResult(list);
         refreshLayout.setOnRefreshListener(this);
+
         return view;
     }
 
@@ -174,7 +177,7 @@ public class NewFragment extends Fragment implements NewsContract.View,SwipeRefr
 
     @Override
     public void showResult(final ArrayList<NewResult.News> list) {
-        getActivity().runOnUiThread(new Runnable() {
+        getMyActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if(mAdapter == null) {
@@ -203,6 +206,23 @@ public class NewFragment extends Fragment implements NewsContract.View,SwipeRefr
 //    public void onStart(){
 //        newsPresenter.start(param);
 //    }
+
+////////////////////////////////////////////////可靠获取Activity///////////////////////////////
+    private Activity mActivity;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        mActivity=activity;
+    }
+    //得到可靠地Activity
+    public Activity getMyActivity()
+    {
+        return mActivity;
+    }
+
+    //////////////////////////////////////切换优化///////////////////////////////
 
 
 }
