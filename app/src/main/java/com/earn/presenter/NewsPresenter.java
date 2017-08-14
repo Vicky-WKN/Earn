@@ -92,7 +92,7 @@ public class NewsPresenter implements NewsContract.Presenter {
                 }
             }
         },map);
-        view.stopLoading();
+        //view.stopLoading();
     }
     @Override
     public void refresh(int i) {

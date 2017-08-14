@@ -42,8 +42,8 @@ public class MyTab extends HorizontalScrollView {
 
     private Drawable indicator;
     private TextDrawable[] drawables;
-    private Drawable left_edge;
-    private Drawable right_edge;
+   // private Drawable left_edge;
+    //private Drawable right_edge;
 
     public MyTab(Context context) {
         this(context, null);
@@ -81,8 +81,8 @@ public class MyTab extends HorizontalScrollView {
         // 绘制高亮区域作为滑动分页指示器
         indicator = getResources().getDrawable(R.drawable.bg_category_indicator);
         // 左右边界阴影效果
-        left_edge = getResources().getDrawable(R.drawable.ic_category_left_edge);
-        right_edge = getResources().getDrawable(R.drawable.ic_category_right_edge);
+       // left_edge = getResources().getDrawable(R.drawable.ic_category_left_edge);
+        //right_edge = getResources().getDrawable(R.drawable.ic_category_right_edge);
     }
 
     // 绑定与CategoryTabStrip控件对应的ViewPager控件，实现联动
@@ -206,27 +206,27 @@ public class MyTab extends HorizontalScrollView {
         }
 
         // 绘制左右边界阴影效果
-        i = canvas.save();
-        int top = getScrollX();
-        int height = getHeight();
-        int width = getWidth();
-        canvas.translate((float) top, 0.0f);
-        if (left_edge == null || top <= 0) {
-            if (right_edge == null || top >= getScrollRange()) {
-                canvas.restoreToCount(i);
-            }
-            right_edge.setBounds(width - right_edge.getIntrinsicWidth(), 0, width, height);
-            right_edge.draw(canvas);
-            canvas.restoreToCount(i);
-        }
-        left_edge.setBounds(0, 0, left_edge.getIntrinsicWidth(), height);
-        left_edge.draw(canvas);
-        if (right_edge == null || top >= getScrollRange()) {
-            canvas.restoreToCount(i);
-        }
-        right_edge.setBounds(width - right_edge.getIntrinsicWidth(), 0, width, height);
-        right_edge.draw(canvas);
-        canvas.restoreToCount(i);
+//        i = canvas.save();
+//        int top = getScrollX();
+//        int height = getHeight();
+//        int width = getWidth();
+//        canvas.translate((float) top, 0.0f);
+//        if (left_edge == null || top <= 0) {
+//            if (right_edge == null || top >= getScrollRange()) {
+//                canvas.restoreToCount(i);
+//            }
+//            right_edge.setBounds(width - right_edge.getIntrinsicWidth(), 0, width, height);
+//            right_edge.draw(canvas);
+//            canvas.restoreToCount(i);
+//        }
+//        left_edge.setBounds(0, 0, left_edge.getIntrinsicWidth(), height);
+//        left_edge.draw(canvas);
+//        if (right_edge == null || top >= getScrollRange()) {
+//            canvas.restoreToCount(i);
+//        }
+//        right_edge.setBounds(width - right_edge.getIntrinsicWidth(), 0, width, height);
+//        right_edge.draw(canvas);
+//        canvas.restoreToCount(i);
     }
 
     private class PageListener implements OnPageChangeListener {

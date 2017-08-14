@@ -69,8 +69,6 @@ public class NewFragment extends Fragment implements NewsContract.View,SwipeRefr
             param = getArguments().getInt("param");
             //new ToastUtil(getActivity(),"param="+param);
         }
-
-
         // TODO 自动生成的方法存根
         if (view != null) {
             ViewGroup parent = (ViewGroup) view.getParent();
@@ -86,14 +84,15 @@ public class NewFragment extends Fragment implements NewsContract.View,SwipeRefr
         viewPager = inflater.inflate(R.layout.news_viewpager_item,container,false);
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refreshLayout);
         refreshLayout.setColorSchemeResources(R.color.colorPrimary);//设置下拉更新旋转颜色
+        refreshLayout.setOnRefreshListener(this);
         initViewPager();
-
+        refreshLayout.setRefreshing(true);
         newsPresenter = new NewsPresenter(getActivity(),this);
         //newsPresenter = new NewsPresenter(getContext(),this);
         newsPresenter.start(param);
         //ArrayList<News.result> list = new ArrayList<>();
         //showResult(list);
-        refreshLayout.setOnRefreshListener(this);
+
 
         return view;
     }
@@ -190,6 +189,8 @@ public class NewFragment extends Fragment implements NewsContract.View,SwipeRefr
                 mAdapter.addDatas(list);
 
                 setHeader(mRecyclerView);
+
+                stopLoading();
             }
         });
 
