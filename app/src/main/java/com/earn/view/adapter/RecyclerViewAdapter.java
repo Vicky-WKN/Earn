@@ -2,8 +2,10 @@ package com.earn.view.adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 
 import com.earn.R;
 import com.earn.model.NewResult;
+import com.earn.view.activity.WebActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -30,6 +33,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private OnItemClickListener mListener;
     private ArrayList<String> pics = new ArrayList<>();
     private ArrayList<String> uri = new ArrayList<>();
+    private ArrayList<NewResult.News> newses = new ArrayList<>();
 
     private Context context;
     public RecyclerViewAdapter(Context context)
@@ -59,6 +63,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
      * @param list
      */
     public void addDatas(ArrayList<NewResult.News> list){
+        newses = list;
         mDatas.clear();
         //News news = new News();
         Iterator it = list.iterator();
@@ -123,17 +128,31 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
 
             //if((mListener == null)) return;
-//            viewHolder.itemView.setOnClickListener(new View.OnClickListener(){
-//                @Override
-//                public void onClick(View v){
-//                   // mListener.onItemClick(pos,data);
-//                    Intent intent = new Intent();
-//                    intent.setClass(context, WebActivity.class);
-//                    intent.putExtra("uri",u);
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    context.startActivity(intent);
-//                }
-//            });
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                   // mListener.onItemClick(pos,data);
+                    Intent intent = new Intent();
+                    intent.setClass(context, WebActivity.class);
+                    if(newses.get(pos).getImgLinks()!=null) {
+
+                        intent.putExtra("img1", newses.get(pos).getImgLinks());
+                        if(newses.get(pos).getImgLinks2()!=null)
+                        {
+                            intent.putExtra("img2",newses.get(pos).getImgLinks2());
+                            Log.d("第二张图片", "onResponse: "+newses.get(pos).getImgLinks2());
+                        }
+
+                    }
+
+
+                    intent.putExtra("title",newses.get(pos).getTitle());
+                    intent.putExtra("text",newses.get(pos).getArtcle());
+                    //intent.putExtra("uri",u);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 

@@ -33,7 +33,8 @@ public class NewResult {
     public class News {
         private String title;
         private String times;
-        private String imgLinks;
+        private String imgLinks=null;
+        private String imgLinks2 = null;
         private String artcle;
 
         public void setTitle(String title){
@@ -44,6 +45,9 @@ public class NewResult {
         }
         public void setImgLinks(String imgLinks){
             this.imgLinks = imgLinks;
+        }
+        public void setImgLinks2(String imgLinks2){
+            this.imgLinks2 = imgLinks2;
         }
         public void setArtcle(String artcle){
             this.artcle = artcle;
@@ -57,6 +61,9 @@ public class NewResult {
         }
         public String getImgLinks(){
             return imgLinks;
+        }
+        public String getImgLinks2(){
+            return imgLinks2;
         }
         public String getArtcle(){
             return artcle;

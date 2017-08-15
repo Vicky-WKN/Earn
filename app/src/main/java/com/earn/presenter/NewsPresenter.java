@@ -76,10 +76,21 @@ public class NewsPresenter implements NewsContract.Presenter {
                             Log.d("新闻标题", "onResponse: "+re.getTitle());
                             //Log.d("图片链接", "onResponse: "+re.getImgLinks());
                             String num[] = new String[11];
+
                             if(re.getImgLinks().length()>5){
                                 num = re.getImgLinks().split("<-separate->");
                             }
-                            re.setImgLinks(num[1]);
+                            for(int i=0;i<num.length;i++){
+                                if (i==1&&num[1]!=null){
+                                     re.setImgLinks(num[1]);
+                                }
+                                if (i==2&&num[2]!=null){
+                                    re.setImgLinks2(num[2]);
+                                    Log.d("第二张图片", "onResponse: "+re.getImgLinks2());
+                                }
+
+                            }
+                            //Log.d("图片个数", "onResponse: "+num.length);
                             news.add(re);
                             Log.d("文章", "onResponse: "+re.getArtcle());
                         }
